@@ -92,7 +92,7 @@ values <- data.frame(
 datapoly <- merge(values, positions, by = c("id"))
 
 # the entire house
-(house <- ggplot(datapoly, aes(x = x, y = y)) + geom_polypathn(aes(fill = value, group = group)))
+(house <- ggplot(datapoly, aes(x = x, y = y)) + geom_polypath(aes(fill = value, group = group)))
 
 # just the front wall (and chimney), with its three parts, the first of which has three holes
 wall <- ggplot(datapoly[datapoly$id == 1, ], aes(x = x, y = y))
