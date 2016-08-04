@@ -1,4 +1,4 @@
 library(testthat)
-library(polyggon)
+library(ggpolypath)
 
-test_check("polyggon")
+test_check("ggpolypath")
