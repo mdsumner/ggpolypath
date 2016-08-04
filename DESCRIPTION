@@ -1,11 +1,11 @@
-Package: polyggon
+Package: ggpolypath
 Type: Package
-Title: Exploring Polygons
+Title: Polygons for the Grammar of Graphics
 Version: 0.1.0
-Description: Tools for working with polygons with holes.
+Description: Tools for working with polygons with holes in 'ggplot2'.
 Authors@R: c(person("Michael D.","Sumner", role = c("aut", "cre"), email = "mdsumner@gmail.com"))
-URL: https://github.com/mdsumner/polyggon
-BugReports: https://github.com/mdsumner/polyggon/issues
+URL: https://github.com/mdsumner/ggpolypath
+BugReports: https://github.com/mdsumner/ggpolypath/issues
 Depends:
     R (>= 3.1),
     ggplot2 (>= 2.1.0)
