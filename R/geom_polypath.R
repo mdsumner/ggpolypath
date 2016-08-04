@@ -1,4 +1,4 @@
-#' Holygon, a filled path that can include holes.
+#' Polpath, a filled path that can include holes.
 #'
 #' The source for this was adapted from http://qiita.com/kohske/items/9272e29a75d32416ff5e
 #' @seealso
@@ -13,7 +13,7 @@
 #' @importFrom grid gpar pathGrob
 #' @importFrom ggplot2 zeroGrob
 #' @examples
-#' # When using geom_holygon, you will typically need two data frames:
+#' # When using geom_polypath, you will typically need two data frames:
 #' # one contains the coordinates of each polygon (positions),  and the
 #' # other the values associated with each polygon (values).  An id
 #' # variable links the two together.
@@ -46,26 +46,26 @@
 #' datapoly <- merge(values, positions, by = c("id"))
 #'
 #' # the entire house
-#' (house <- ggplot(datapoly, aes(x = x, y = y)) + geom_holygon(aes(fill = value, group = group)))
+#' (house <- ggplot(datapoly, aes(x = x, y = y)) + geom_polypathn(aes(fill = value, group = group)))
 #'
 #' # just the front wall (and chimney), with its three parts, the first of which has three holes
 #' wall <- ggplot(datapoly[datapoly$id == 1, ], aes(x = x, y = y))
-#' wall + geom_holygon(aes(fill = id, group = group))
-geom_holygon <- function (mapping = NULL, data = NULL, stat = "identity", position = "identity",
+#' wall + geom_polypath(aes(fill = id, group = group))
+geom_polypath <- function (mapping = NULL, data = NULL, stat = "identity", position = "identity",
                           na.rm = FALSE, show.legend = NA, inherit.aes = TRUE, rule = "winding", ...) {
-  ggplot2::layer(data = data, mapping = mapping, stat = stat, geom = GeomHolygon,
+  ggplot2::layer(data = data, mapping = mapping, stat = stat, geom = GeomPolypath,
                  position = position, show.legend = show.legend, inherit.aes = inherit.aes,
                  params = list(na.rm = na.rm , rule = rule, ...))
 }
 
 
 
-#' @rdname geom_holygon
+#' @rdname geom_polypath
 #' @format NULL
 #' @usage NULL
 #' @export
-GeomHolygon <- ggproto(
-  "GeomHolygon",
+GeomPolypath <- ggproto(
+  "GeomPolypath",
   GeomPolygon,
   extra_params = c("na.rm", "rule"),
   draw_panel = function(data, scales, coordinates, rule) {
