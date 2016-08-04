@@ -8,11 +8,11 @@ output:
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ---
-[![Travis-CI Build Status](https://travis-ci.org/mdsumner/polyggon.svg?branch=master)](https://travis-ci.org/mdsumner/polyggon)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mdsumner/polyggon?branch=master&svg=true)](https://ci.appveyor.com/project/mdsumner/polyggon)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/polyggon)](https://cran.r-project.org/package=polyggon) 
-[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/polyggon)](http://www.r-pkg.org/pkg/polyggon)
-[![Coverage Status](https://img.shields.io/codecov/c/github/mdsumner/polyggon/master.svg)](https://codecov.io/github/mdsumner/polyggon?branch=master)
+[![Travis-CI Build Status](https://travis-ci.org/mdsumner/ggpolypath.svg?branch=master)](https://travis-ci.org/mdsumner/ggpolypath)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mdsumner/ggpolypath?branch=master&svg=true)](https://ci.appveyor.com/project/mdsumner/ggpolypath)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/ggpolypath)](https://cran.r-project.org/package=polyggon) 
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/ggpolypath)](http://www.r-pkg.org/pkg/polyggon)
+[![Coverage Status](https://img.shields.io/codecov/c/github/mdsumner/ggpolypath/master.svg)](https://codecov.io/github/mdsumner/ggpolypath?branch=master)
 
 ```{r, echo = FALSE, message = FALSE}
 knitr::opts_chunk$set(
@@ -26,14 +26,8 @@ library(ggplot2)
 ```
 
 
-**PLEASE NOTE:** this work is very much *in-progress*, and this package and documentation is not completely reproducible or self-contained yet. The package might be passing build tests, but that's because it hardly does anything - the readme below relies on a local set up for now. 
 
-This is also not a helpful guide if you are learning to make maps in R, this is very much experimental and very much subject to change. 
-
-Please let me know if the examples here are of interest, very open to suggestions and for the use of real-world data. Much of the motivation comes from being able to plot polygons in 3D with `rgl`, but that's pretty rigid and hard to share. We can build these tools to be used with new web technologies, but there's a bit of work to do to synchronize the traditional GIS-like workflows and formats to those used by graphics and web tools. 
-
-
-## Polygons in R
+## Polygons in 'ggplot2'
 
 It is possible to draw "polygons with holes" with `ggplot2`. Here we show two methods and explore some of the details.  
 
@@ -43,10 +37,6 @@ It is possible to draw "polygons with holes" with `ggplot2`. Here we show two me
 For some background on the R graphics capabilities see https://www.stat.auckland.ac.nz/~paul/R/Paths/MurrellPaths.pdf. 
 
 
-This document was written to complement the discussion here  http://mdsumner.github.io/2016/03/03/polygons-R.html and is part of an ongoing effort to improve the useability of spatial data in R. 
-
-I use a mix of idioms of R code from several packages, including some packages of my own and maybe it's too mixed. This is at least partly because I'm still learning the best ways to navigate when using a mixture of the packages, especially `sp`, `ggplot2` and `dplyr` that have their own established styles and perspectives. 
-
 ## Example polygons
 
 The `polypath` function in R (introduced in `R` version `2.12.0`) provides a general facility to draw *polygon paths*, with a rule for how the space traversed is filled. The two rules are "evenodd" and "winding" (the non-zero rule). Generally, the evenodd rule is the most straightforward, and corresponds to expectations from using GIS software. The non-zero rule only really matters for self-intersecting paths, or when the orientation of a path is of interest[^2]. 
@@ -55,8 +45,7 @@ The `polypath` function in R (introduced in `R` version `2.12.0`) provides a gen
 
 The `polypath` function provides a simple example for drawing two rectangles in different situations, in order to illustrate the difference beween winding and evenodd[^3]. Here we build data frames to store these examples, and include group and id attributes to distinguish close ring paths and the different situations. 
 
-[^3]: TODO doc that illustrates winding vs. evenodd, this is good [wikipedia figure](https://commons.wikimedia.org/wiki/File:Even-odd_and_non-zero_winding_fill_rules.svg) but outlining the implications for polygon layers, and the behaviour of point-in-polygon would be helpful. 
-
+[^3]: Winding vs. evenodd  [wikipedia figure](https://commons.wikimedia.org/wiki/File:Even-odd_and_non-zero_winding_fill_rules.svg). 
 
 
 The result in the examples looks like this: 
@@ -188,354 +177,21 @@ par(op)
 
 There's no way to use `geom_polygon` to get these "polygons with hole" effects. We write a new `geom_holygon`, [inspired by this post](http://qiita.com/kohske/items/9272e29a75d32416ff5e) - but also include application across different `id` values as well as different group values. This is exactly analogous to the need to call `polypath` multiple times above. 
 
-[^1]: TODO proper attribution and record of the `geom_holygon` function. 
+[^1]: TODO proper attribution and record of the `geom_polypath` function. 
 
 ```{r}
-library(polyggon)
+library(ggpolypath)
 library(ggplot2)
 library(grid)
 descpoints <- inner_join(pts, objects) %>% mutate(border = 1)
 ggplot(descpoints) + 
   aes(x = x, y = y, group = group, fill = factor(id), col = border) + 
-  geom_holygon(rule = "winding") + facet_wrap(~ description, nrow = 5)
+  geom_polypath(rule = "winding") + facet_wrap(~ description, nrow = 5)
 
 
 
 ggplot(descpoints) + 
   aes(x = x, y = y, group = group, fill = factor(id), col = border) + 
-  geom_holygon(rule = "evenodd") + facet_wrap(~ description, nrow = 5)
+  geom_polypath(rule = "evenodd") + facet_wrap(~ description, nrow = 5)
 ```
 
-
-## Simple polygons are too easy! 
-
-Right, so let's have a look at some that are complicated. These polygons were derived from the [Manifold Free Stuff downloads](http://www.manifold.net/updates/data_downloads.shtml) by combining the `Provinces` data set with the `Inland Waters` layer from the `Hydrography` map projects. TODO full provenance. 
-
-
-```{r}
-library(rgdal)
-
-iw <- readOGR(system.file("extdata", "inlandwaters.gpkg", package = "polyggon"), "inlandwaters")
-plot(iw, col = rainbow(nrow(iw), alpha = 0.4))
-```
-
-
-
-Indeed those are some pretty riotously complicated polygons. 
-
-Check out that detail!
-
-
-
-```{r}
-library(spdplyr)
-p <- par(mar = rep(0, 4), xpd = NA)
-iw %>% filter(Province == "Tasmania") %>% plot(col = "firebrick", border = NA)
-mtext("Tasmanian mainland", side = 3, line = -8)
-mtext("Macquarie Island, remote", side = 1, line = -4)
-llgridlines(filter(iw, Province == "Tasmania"))
-par(p)
-
-
-
-## try again, first we drop the non-main island pieces
-tasmain <- iw %>% filter(Province == "Tasmania")
-library(spbabel)
-sptable(tasmain) <- sptable(tasmain) %>% filter(!island_ | branch_ == 2)
-plot(tasmain, col = "firebrick", border = NA)
-with(sptable(tasmain), points(x_, y_, pch = "."))
-ggtas <- fortify(tasmain)
-## admittedly long and lat are not the right names at all
-ggplot(ggtas) + aes(x = long, y = lat, group = group, fill = id) + geom_holygon() + coord_equal()
-
-
-
-iwsa <- iw %>% filter(Province == "South Australia") 
-plot(iwsa, col = "dodgerblue", border = NA, bg = "grey"); p <- par(xpd = NA); llgridlines(iwsa); par(p)
-```
-
-
-
-Ggplot. 
-
-
-```{r}
-iwt <- fortify(iw)
-
-## admittedly long and lat are not the right names at all
-ggplot(iwt) + aes(x = long, y = lat, group = group, fill = id) + geom_holygon()  + coord_equal()
-
-```
-
-
-## An alternative with triangulation
-
-To convert a layer of polygons to triangles we first need to decompose the polygons completely into line segments, and
-to do that we first need the vertices classified by branch and object (each branch, or part, is a "single ring" or "self-connect path"). 
-
-The `holey` data set is a table of vertices classified by part, object and describes a partly topological polygon layer. There are vertices used more than once, by other objects and their are shared edges. Here we just look at a three-island, one with three-holes object. 
-
-
-
-First plot in the traditional way, and with our new wholly righteous geom tools. 
-
-```{r}
-library(spbabel)
-sph <- sp(holey)
-## as expected sp performs
-plot(sph[1,], col = "grey")
-
-## but ggplot2 holds its own
-ggplot(holey %>% filter(object_==1)) + aes(x = x_, y = y_, group = branch_, fill = object_) + geom_holygon()  + coord_equal()
-
-```
-
-
-Now for the triangulation approach, we need a worker function to create a list of vertices, branches, and object tables. Vertices and branches are linked by an intermediate table, so that we can store only the unique coordinates. 
-
-
-```{r}
-## moving this to spbabel
-maptables <- function(dat1, map1) {
-  ## we expect that these attributes, taken together are "unique vertices" potentially shared by neighbours
-  v_atts <- c("x_", "y_")
-  o_atts <- setdiff(names(map1), v_atts)
-  b_atts <- setdiff(o_atts, c("order_", "vertex_"))
-  bxv_atts <- c(setdiff(names(map1), c("object_", "island_", v_atts)), "vertex_")
- 
-  ## classify unique vertices by unique index
-  ## could tidy this up some more . . .
-  map1 <- map1 %>%
-    mutate(vertex_  = as.integer(factor(do.call(paste, select_(map1, .dots = v_atts))))) %>% 
-    mutate(vertex_ = spbabel:::id_n(length(unique(vertex_)))[vertex_])
-  
-  branchV_to_segmentV <- function(x) {
-    head(matrix(x, ncol = 2, nrow = length(x) + 1L), -1L)
-  }
-  
-  #map1$vertex_ <- id_nrow(nrow(map1))[map1$vertex_]
-  ## branches, owner object and island status
-  b <- map1 %>% distinct_(.dots = b_atts) 
-  ## four tables (dat1, map2, map4, map5)
-  bXv <- map1 %>% dplyr::select_(.dots = bxv_atts)
-  v <- map1 %>% distinct_(.dots = c(v_atts, "vertex_"))
-  res <- list(o = dat1, b = b,  bXv = bXv, v = v)
-  res
-}
-```
-
-
-
-```{r}
-mt <- spbabel:::map_tablesFrom2(data.frame(name = "wall", object_ = 1), holey %>% filter(object_ == 1))
-nrow(holey %>% filter(object_ == 1))  ## how many coordinates?
-nrow(mt$v)   ## how many unique coordinates?
-```
-
-
-Now we can build a "planar straight line graph" and triangulate. The triangulation algorithm needs the line segments as fully fledged entities, so that it it can ensure those edges exist in the triangle mesh (this is not something the Delaunay criterion provides, so the algorithm is "mostly Delaunay" - see Shewchuk). 
-
-
-
-```{r}
-path2seg <- function(x) {
-  head(suppressWarnings(matrix(x, nrow = length(x) + 1, ncol = 2, byrow = FALSE)), -2L)
-}
-
-mt$v$countingIndex <- seq(nrow(mt$v))
-nonuq <- inner_join(mt$bXv, mt$v)
-library(RTriangle)
-ps <- pslg(P = as.matrix(mt$v[, c("x_", "y_")]), S = do.call(rbind, lapply(split(nonuq, nonuq$branch_), function(x) path2seg(x$countingIndex))))
-
-## TODO: robust hole filtering
-## I happen to know this will work, but we can use triangle filtering post hoc too, or use a known inner centroid
-ps$H <- holey %>% filter(!island_) %>% 
-  group_by(branch_) %>% summarize(xm = mean(x_), ym = mean(y_)) %>% 
-  select(xm, ym) %>% 
-  as.matrix()
-tr <- triangulate(ps)
-```
-
-
-Now we can use polygon or geom_polygon. 
-
-
-```{r}
-plot(tr$P)
-apply(tr$T, 1, function(tindex) polygon(tr$P[tindex, ], col = "grey", border = NA))
-
-pol <- tibble(x = tr$P[t(tr$T), 1L], y = tr$P[t(tr$T), 2L], part = rep(seq(nrow(tr$T)), each = 3))
-ggplot(pol) + aes(x = x, y = y, group = part) + geom_polygon()  + coord_equal()
-```
-
-
-
-Clearly to make this useful we need to abstract away another level, so we can have multiple IDs each with multiple parts. I don't think we can use RTriangle as-is to maintain this object level, but that's the same for the graphics functions anyway. 
-
-
-## Lake Superior
-
-This lake is used as an example challenge for constrained Delaunay Triangulation on a polygon with holes in Jonathan Shewchuk's Triangle library. See here: 
-
-https://www.cs.cmu.edu/~quake/triangle.html
-
-
-The `polyggon` package includes a GeoPackage file with an OGC simple features polygon map of Lake Superior, based on NOAA's Great Lakes Medium Resolution Digital Shoreline and provided by the Minnesota Geospatial Commons](https://gisdata.mn.gov/dataset/water-lake-superior-basin). The single object with `Feature == "Water"` is the main piece and includes hole-filling island polygons as well. It's a great example!
-
-```{r}
-library(rgdal)
-lake <- readOGR(system.file("extdata", "water_lake_superior_basin.gpkg", package = "polyggon"),
-                "lake_superior_basin")
-slake <- filter(lake, Feature == "Water")
-
-plot(slake, col = "grey")
-
-library(spbabel)
-gp <- (slake %>% 
-  sptable() %>% 
-  ggplot()) + 
-  aes(x = x_, y = y_, group = branch_) + 
-  geom_holygon()  + coord_equal()
-
-gp + coord_equal()
-```
-
-Drawing proper holes with `ggplot2` is great, but there's also really good reasons to be able to treat a polygon as a triangular mesh. 
-
-```{r}
-lakemt <- spbabel:::map_tablesFrom2(slake, sptable(slake))
-lakemt$v$countingIndex <- seq(nrow(lakemt$v))
-nonuq <- inner_join(lakemt$bXv, lakemt$v)
-library(RTriangle)
-ps <- pslg(P = as.matrix(lakemt$v[, c("x_", "y_")]), 
-           S = do.call(rbind, lapply(split(nonuq, nonuq$branch_), function(x) path2seg(x$countingIndex))))
-
-
-## TODO: 
-## this time the simple centroid won't work, we need to post-process the triangles
-#ps$H <- sptable(slake) %>% filter(!island_) %>% 
-#  group_by(branch_) %>% summarize(xm = mean(x_), ym = mean(y_)) %>% 
-#  select(xm, ym) %>% 
-#  as.matrix()
-## min size takes T count from 47460 to 58246
-tr <- triangulate(ps, a = 1e7)
-
-centroids <- t(apply(tr$T, 1, function(x) apply(tr$P[x, ], 2, mean)))
-badtris <- is.na(over(SpatialPoints(centroids, proj4string = CRS(proj4string(slake))), 
-                slake)[[1]])
-
-```
-
-Prove again that we can use either polygon or geom_polygon with these triangles. 
-
-TBD
-
-```{r,eval=FALSE}
-plot(tr$P, asp = 1, pch = ".")
-## this is by far the slowest part of this knit
-apply(tr$T[!badtris, ], 1, function(tindex) polygon(tr$P[tindex, ], col = "grey", border = alpha("black", 0.2)))
-
-```
-
-```{r}
-pol <- tibble(x = tr$P[t(tr$T[!badtris, ]), 1L], 
-              y = tr$P[t(tr$T[!badtris, ]), 2L], 
-              part = rep(seq(nrow(tr$T[!badtris, ])), each = 3))
-
-ggplot(pol) + aes(x = x, y = y, group = part) + geom_polygon()  + coord_equal()
-```
-
-An interesting thing to compare is the speed. Of course to be fair we should avoid the use of apply first. 
-
-```{r}
-## slow
-##tritab <- head(do.call(rbind, lapply(split(pol, pol$part), function(x) rbind(x, NA))), -1)
-## fast:
-tritab <- head(pol[unlist(lapply(split(seq(nrow(pol)), pol$part), function(x) c(x, NA_real_))), ], -1)
-
-
-system.time({
-  plot(tr$P, asp = 1, pch = ".")
-#apply(tr$T[!badtris, ], 1, function(tindex) polygon(tr$P[tindex, ], col = "grey", border = alpha("black", 0.2)))
-  polygon(tritab$x, tritab$y, col = "grey", border = NA)
-  
-})
-
-system.time({
-  print(ggplot(pol) + aes(x = x, y = y, group = part) + geom_polygon()  + coord_equal())
-})
-
-
-```
-
-
-We can now do nice things like apply continuous scaling across the polygon. **Yes**, that can be done with `polygon` and potentially with other formats for spatial data, but for me the generality of `ggplot2` and relatedly tidy approaches provide the simplest and most valuable way forward. 
-
-
-```{r}
-pp <- pol %>% group_by(part) %>% mutate(horiz = mean(x))
-ggplot(pp) + 
-  aes(x = x, y= y, group = part, fill = horiz) + 
-  geom_polygon()  + coord_equal()
-  
-```
-
-For a more interesting example, now copy the lake bathymetry into our polygonized mesh and plot. The lake bathymetry is [downloaded from NOAA](https://www.ngdc.noaa.gov/mgg/greatlakes/superior.html). These are completely independent (from my perspective) data sets, one is a projected polygon map and the other is a non-projected raster grid of topography. 
-
-
-```{r, fig.width=9, fig.height=7}
-library(raster)
-pol$bathy <- extract(raster("data-raw/superior_lld/superior.tif"), project(as.matrix(pol[, c("x", "y")]), projection(slake), inv = TRUE))
-pp <- pol %>% group_by(part) %>% mutate(bathy = mean(bathy))
-ggplot(pp) + 
-  aes(x = x, y= y, group = part, fill = bathy) + 
-  geom_polygon()  + coord_equal()
-  
-```
-
-**TODO** wrap up the tools and compare the default triangulation without specifying a maximum area. 
-
-We get a much better result by specifying a minimum area to `RTriangle::triangulate`, since we get more triangles in the middle where there's no variation - it doesn't affect the edges much since they were already small to account for the complexity of the polygon edges. 
-
-What about the data size? 
-
-```{r}
-pryr::object_size(slake)
-
-pryr::object_size(pp)
-
-pryr::object_size(tr)
-```
-
-
-```{r badass, eval=FALSE}
-install.packages("rgl")
-library(rgl)
-
-tr <- RTriangle::triangulate(ps, a = 1e6)
-
-centroids <- t(apply(tr$T, 1, function(x) apply(tr$P[x, ], 2, mean)))
-badtris <- is.na(over(SpatialPoints(centroids, proj4string = CRS(proj4string(slake))), 
-                      slake)[[1]])
-
-zz <- extract(raster("data-raw/superior_lld/superior.tif"), project(tr$P, projection(slake), inv = TRUE))
-tt <- tetrahedron3d()
-tt$vb <- t(cbind(tr$P, zz, 1))
-tt$it <- t(tr$T[!badtris, ])
-aspect3d(1, 1, 15)
-shade3d(tt, col = "grey")
-axes3d()
-```
-
-
-## Next, why are polygon meshes useful?
-
-Why not just plot the raster, mask the grid out by polygon? 
-
-3D plotting
-
-analyses across meshes
-
-adaptive resolution, rather than a compromise
-
-TO BE CONTINUED
