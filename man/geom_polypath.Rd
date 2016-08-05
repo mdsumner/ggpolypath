@@ -66,6 +66,18 @@ The source for this was adapted from http://qiita.com/kohske/items/9272e29a75d32
 # Normally this would not be created manually, but by using \\code{\\link{fortify}}
 # to generate it from the Spatial classes in the `sp` package.
 
+## the built-in data \\code{\\link{home}} uses nested data frames
+\dontrun{
+library(tidyr)
+library(ggplot2)
+library(dplyr)
+dat <- home \%>\% select(name, object_, part) \%>\% unnest() \%>\% unnest()
+ggplot(dat) +
+aes(x = x_, y = y_, group = branch_, fill = factor(object_)) +
+geom_polypath()
+)}
+
+## this is the same example built from scratch
 positions = data.frame(x = c(0, 0, 46, 46, 0, 7, 13, 13, 7, 7, 18, 24,
 24, 18, 18, 31, 37, 37, 31, 31, 18.4, 18.4, 18.6, 18.8, 18.8,
 18.6, 18.4, 31, 31, 37, 37, 31, 0, 21, 31, 37, 46, 0, 18, 18,
