@@ -10,6 +10,14 @@ ggpolypath
 
 A `ggplot2` geom for polygons with holes.
 
+Install
+-------
+
+``` r
+## install from Github
+devtools::install_github("mdsumner/ggpolypath")
+```
+
 Example
 -------
 
