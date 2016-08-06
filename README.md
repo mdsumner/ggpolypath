@@ -28,3 +28,10 @@ data(maphome)
 ggplot(maphome) + aes(x = x_, y = y_, group = branch_, fill = object_) +
   geom_polypath()
 ```
+
+Gory details
+------------
+
+More examples, and more detail than you probably need can be found here:
+
+<https://github.com/r-gris/polyggon/blob/master/README.md>
