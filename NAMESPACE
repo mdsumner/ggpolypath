@@ -3,5 +3,3 @@
 export(GeomPolypath)
 export(geom_polypath)
 importFrom(ggplot2,zeroGrob)
-importFrom(grid,gpar)
-importFrom(grid,pathGrob)

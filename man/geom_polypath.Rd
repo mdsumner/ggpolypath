@@ -4,7 +4,7 @@
 \name{geom_polypath}
 \alias{GeomPolypath}
 \alias{geom_polypath}
-\title{Polpath, a filled path that can include holes.}
+\title{Geom polypath, a filled path that can include holes.}
 \usage{
 geom_polypath(mapping = NULL, data = NULL, stat = "identity",
   position = "identity", na.rm = FALSE, show.legend = NA,
@@ -67,15 +67,9 @@ The source for this was adapted from http://qiita.com/kohske/items/9272e29a75d32
 # to generate it from the Spatial classes in the `sp` package.
 
 ## the built-in data \\code{\\link{home}} uses nested data frames
-\dontrun{
-library(tidyr)
 library(ggplot2)
-library(dplyr)
-dat <- home \%>\% select(name, object_, part) \%>\% unnest() \%>\% unnest()
-ggplot(dat) +
-aes(x = x_, y = y_, group = branch_, fill = factor(object_)) +
+ggplot(maphome) + aes(x = x_, y = y_, group = branch_, fill = factor(object_)) +
 geom_polypath()
-)}
 
 ## this is the same example built from scratch
 positions = data.frame(x = c(0, 0, 46, 46, 0, 7, 13, 13, 7, 7, 18, 24,

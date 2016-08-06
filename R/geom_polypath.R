@@ -1,4 +1,4 @@
-#' Polpath, a filled path that can include holes.
+#' Geom polypath, a filled path that can include holes.
 #'
 #' The source for this was adapted from http://qiita.com/kohske/items/9272e29a75d32416ff5e
 #' @seealso
@@ -10,7 +10,6 @@
 #' @export
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
-#' @importFrom grid gpar pathGrob
 #' @importFrom ggplot2 zeroGrob
 #' @examples
 #' # When using geom_polypath, you will typically need two data frames:
@@ -21,15 +20,9 @@
 #' # to generate it from the Spatial classes in the `sp` package.
 #'
 #' ## the built-in data \code{\link{home}} uses nested data frames
-#' \dontrun{
-#' library(tidyr)
 #' library(ggplot2)
-#' library(dplyr)
-#' dat <- home %>% select(name, object_, part) %>% unnest() %>% unnest()
-#' ggplot(dat) +
-#' aes(x = x_, y = y_, group = branch_, fill = factor(object_)) +
+#' ggplot(maphome) + aes(x = x_, y = y_, group = branch_, fill = factor(object_)) +
 #' geom_polypath()
-#' )}
 #'
 #' ## this is the same example built from scratch
 #' positions = data.frame(x = c(0, 0, 46, 46, 0, 7, 13, 13, 7, 7, 18, 24,
@@ -93,7 +86,7 @@ GeomPolypath <- ggproto(
       first_rows <- xmunch[first_idx, ]
       grid::pathGrob(xmunch$x, xmunch$y, default.units = "native",
                id = xmunch$group, rule = rule,
-               gp = gpar(col = first_rows$colour,
+               gp = grid::gpar(col = first_rows$colour,
                          fill = alpha(first_rows$fill, first_rows$alpha),
                          lwd = first_rows$size * .pt,
                          lty = first_rows$linetype))
