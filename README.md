@@ -23,14 +23,24 @@ Example
 
 ``` r
 library(ggpolypath)
+#> Loading required package: ggplot2
 data(maphome)
 
 ggplot(maphome) + aes(x = x_, y = y_, group = branch_, fill = object_) +
   geom_polypath()
 ```
 
-Gory details
-------------
+![](figure/README-unnamed-chunk-3-1.png)
+
+The same example, but using the linked per-object metadata.
+
+``` r
+ggplot(merge(maphome, dathome[, c("object_", "name")])) + 
+  aes(x = x_, y = y_, group = branch_, fill = name) + 
+  geom_polypath()
+```
+
+![](figure/README-unnamed-chunk-4-1.png) \#\# Gory details
 
 More examples, and more detail than you probably need can be found here:
 
