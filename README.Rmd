@@ -1,8 +1,8 @@
 ---
 output:
   rmarkdown::github_document:
-    fig_width: 6
-    fig_height: 8
+    fig_width: 4
+    fig_height: 3
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -53,6 +53,7 @@ ggplot(merge(maphome, dathome[, c("object_", "name")])) +
   geom_polypath()
 
 ```
+
 ## Gory details
 
 More examples, and more detail than you probably need can be found here: 

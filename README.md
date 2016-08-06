@@ -40,7 +40,10 @@ ggplot(merge(maphome, dathome[, c("object_", "name")])) +
   geom_polypath()
 ```
 
-![](figure/README-unnamed-chunk-4-1.png) \#\# Gory details
+![](figure/README-unnamed-chunk-4-1.png)
+
+Gory details
+------------
 
 More examples, and more detail than you probably need can be found here:
 
