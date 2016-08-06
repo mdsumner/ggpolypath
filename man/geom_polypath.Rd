@@ -103,6 +103,7 @@ datapoly <- merge(values, positions, by = c("id"))
 # just the front wall (and chimney), with its three parts, the first of which has three holes
 wall <- ggplot(datapoly[datapoly$id == 1, ], aes(x = x, y = y))
 wall + geom_polypath(aes(fill = id, group = group))
+
 }
 \seealso{
 \code{\link{geom_polygon}} for the implementation on \code{\link[grid]{polygonGrob}},

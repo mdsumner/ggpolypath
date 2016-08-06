@@ -4,12 +4,24 @@
 \name{dathome}
 \alias{dathome}
 \alias{maphome}
-\title{home data}
+\title{Simple polygon data}
+\format{\code{dathome} is the metadata, a data frame with columns:
+\describe{
+ \item{name}{A descriptive name}
+ \item{colour}{A colour to distinguish each object}
+ \item{FAD}{An arbitrary numeric value}
+ \item{object_}{Key attribute, linking this object to its geometry in \code{\link{maphome}}}
+}}
 \description{
-a home of three objects with multiple parts as two related data frames
+A "home" profile of three objects with multiple parts as two related data frames.
 }
 \details{
-\code{dathome} is the metadata
 \code{maphome} is the geometry
+}
+\examples{
+ggplot(maphome) + aes(x = x_, y = y_, group = branch_, fill = object_) +
+geom_polypath() + facet_wrap(~object_, nrow = nrow(dathome))
+
+
 }
 

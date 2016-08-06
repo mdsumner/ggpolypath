@@ -56,6 +56,7 @@
 #' # just the front wall (and chimney), with its three parts, the first of which has three holes
 #' wall <- ggplot(datapoly[datapoly$id == 1, ], aes(x = x, y = y))
 #' wall + geom_polypath(aes(fill = id, group = group))
+#'
 geom_polypath <- function (mapping = NULL, data = NULL, stat = "identity", position = "identity",
                           na.rm = FALSE, show.legend = NA, inherit.aes = TRUE, rule = "winding", ...) {
   ggplot2::layer(data = data, mapping = mapping, stat = stat, geom = GeomPolypath,

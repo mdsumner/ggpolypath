@@ -3,8 +3,12 @@ Type: Package
 Title: Polygons for the Grammar of Graphics
 Version: 0.1.0
 Description: Tools for working with polygons with holes in 'ggplot2'.
-Authors@R: c(person("Michael D.","Sumner", role = c("aut", "cre"), email = "mdsumner@gmail.com"))
-URL: https://github.com/mdsumner/ggpolypath
+Authors@R: c(person("Michael D.","Sumner",
+    role = c("aut", "cre"), email = "mdsumner@gmail.com"),
+    person(given = "Kohske", family = "Takahashi",
+       email = "takahashi.kohske@gmail.com",
+       role = "ctb", comment = "original author of 'geom_holygon'"))
+URL: https://github.com/mdsumner/ggpolypath, http://rpubs.com/kohske/3522
 BugReports: https://github.com/mdsumner/ggpolypath/issues
 Depends:
     R (>= 3.1),
