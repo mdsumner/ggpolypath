@@ -4,7 +4,7 @@
 \name{geom_polypath}
 \alias{GeomPolypath}
 \alias{geom_polypath}
-\title{Geom polypath, a filled path that can include holes.}
+\title{Geom polypath, a polygon filled path that can include holes.}
 \usage{
 geom_polypath(mapping = NULL, data = NULL, stat = "identity",
   position = "identity", na.rm = FALSE, show.legend = NA,
@@ -56,7 +56,15 @@ often aesthetics, used to set an aesthetic to a fixed value, like
 to the paired geom/stat.}
 }
 \description{
-The source for this was adapted from http://qiita.com/kohske/items/9272e29a75d32416ff5e
+Polygons are drawn by tracing a 'path' of linked vertices and applying  rule to differentiate
+the inside and the outside of the area traversed. The 'evenodd' rule provides the normal
+expected behaviour seen in simple GIS geometry and is immune to self-intersections and the
+orientation of the path (clockwise or anti-clockwise). The 'winding' rule behaves differently
+for self-intersections depending on relative orientation of the interacting paths.
+}
+\details{
+See \url{https://en.wikipedia.org/wiki/Even-odd_rule} and
+\url{https://en.wikipedia.org/wiki/Nonzero-rule} for more details.
 }
 \examples{
 # When using geom_polypath, you will typically need two data frames:
@@ -106,6 +114,7 @@ wall + geom_polypath(aes(fill = id, group = group))
 
 }
 \seealso{
+\code{\link{polypath}} and \code{\link{pathGrob}}
 \code{\link{geom_polygon}} for the implementation on \code{\link[grid]{polygonGrob}},
 \code{\link{geom_map}} for a convenient way to tie the values and coordinates together,
  \code{\link{geom_path}} for an unfilled polygon,

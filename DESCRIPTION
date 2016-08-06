@@ -1,8 +1,9 @@
 Package: ggpolypath
 Type: Package
-Title: Polygons for the Grammar of Graphics
+Title: Polygons with Holes for the Grammar of Graphics
 Version: 0.1.0
-Description: Tools for working with polygons with holes in 'ggplot2'.
+Description: Tools for working with polygons with holes in 'ggplot2', with a new 'geom' for drawing a
+   'polypath' applying the 'evenodd' or 'winding' rules.
 Authors@R: c(person("Michael D.","Sumner",
     role = c("aut", "cre"), email = "mdsumner@gmail.com"),
     person(given = "Kohske", family = "Takahashi",
@@ -14,11 +15,9 @@ Depends:
     R (>= 3.1),
     ggplot2 (>= 2.1.0)
 Suggests:
-    testthat,
     rmarkdown,
     knitr,
     covr
-VignetteBuilder: knitr
 LazyData: yes
 License: GPL-3
 RoxygenNote: 5.0.1

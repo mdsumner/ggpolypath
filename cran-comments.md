@@ -9,3 +9,6 @@
 
 * This is a new release.
 
+* CRAN and r-pkg.org URLs are pre-emptive 
+
+

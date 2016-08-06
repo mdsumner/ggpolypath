@@ -1,7 +1,15 @@
-#' Geom polypath, a filled path that can include holes.
+#' Geom polypath, a polygon filled path that can include holes.
 #'
-#' The source for this was adapted from http://qiita.com/kohske/items/9272e29a75d32416ff5e
+#' Polygons are drawn by tracing a 'path' of linked vertices and applying  rule to differentiate
+#' the inside and the outside of the area traversed. The 'evenodd' rule provides the normal
+#' expected behaviour seen in simple GIS geometry and is immune to self-intersections and the
+#' orientation of the path (clockwise or anti-clockwise). The 'winding' rule behaves differently
+#' for self-intersections depending on relative orientation of the interacting paths.
+#'
+#' See \url{https://en.wikipedia.org/wiki/Even-odd_rule} and
+#' \url{https://en.wikipedia.org/wiki/Nonzero-rule} for more details.
 #' @seealso
+#' \code{\link{polypath}} and \code{\link{pathGrob}}
 #' \code{\link{geom_polygon}} for the implementation on \code{\link[grid]{polygonGrob}},
 #' \code{\link{geom_map}} for a convenient way to tie the values and coordinates together,
 #'  \code{\link{geom_path}} for an unfilled polygon,
