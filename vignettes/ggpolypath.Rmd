@@ -1,0 +1,28 @@
+---
+title: "Polygons with holes for ggplot2"
+author: "Michael D. Sumner"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ggpolypath}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+library(ggpolypath)
+data(maphome)
+
+ggplot(maphome) + aes(x = x_, y = y_, group = branch_, fill = object_) +
+  geom_polypath()
+
+```
+
+The same example, but using the linked per-object metadata. 
+
+```{r,eval=TRUE}
+ggplot(merge(maphome, dathome[, c("object_", "name")])) + 
+  aes(x = x_, y = y_, group = branch_, fill = name) + 
+  geom_polypath()
+
+```

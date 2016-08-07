@@ -1,3 +1,7 @@
+-   [ggpolypath](#ggpolypath)
+-   [Install](#install)
+-   [Example](#example)
+-   [Gory details](#gory-details)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 

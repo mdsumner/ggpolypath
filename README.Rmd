@@ -1,6 +1,9 @@
 ---
 output:
-  rmarkdown::github_document
+  md_document:
+    variant: markdown_github
+    toc: true
+    toc_depth: 2
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -34,22 +37,8 @@ devtools::install_github("mdsumner/ggpolypath")
 
 ## Example
 
-```{r,eval=TRUE}
-library(ggpolypath)
-data(maphome)
-
-ggplot(maphome) + aes(x = x_, y = y_, group = branch_, fill = object_) +
-  geom_polypath()
-
-```
-
-The same example, but using the linked per-object metadata. 
-
-```{r,eval=TRUE}
-ggplot(merge(maphome, dathome[, c("object_", "name")])) + 
-  aes(x = x_, y = y_, group = branch_, fill = name) + 
-  geom_polypath()
-
+See the vigne
+```{r vignette-body, child = "vignettes/ggpolypath.Rmd"}
 ```
 
 ## Gory details
