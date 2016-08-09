@@ -11,4 +11,8 @@
 
 * CRAN and r-pkg.org URLs are pre-emptive 
 
+Thanks very much, 
+
+Michael Sumner. 
+
 

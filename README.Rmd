@@ -2,8 +2,6 @@
 output:
   md_document:
     variant: markdown_github
-    toc: true
-    toc_depth: 2
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -13,7 +11,6 @@ output:
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mdsumner/ggpolypath?branch=master&svg=true)](https://ci.appveyor.com/project/mdsumner/ggpolypath)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/ggpolypath)](https://cran.r-project.org/package=ggpolypath) 
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/ggpolypath)](http://www.r-pkg.org/pkg/ggpolypath)
-[![Coverage Status](https://img.shields.io/codecov/c/github/mdsumner/ggpolypath/master.svg)](https://codecov.io/github/mdsumner/ggpolypath?branch=master)
 
 ```{r, echo = FALSE, message = FALSE}
 knitr::opts_chunk$set(
