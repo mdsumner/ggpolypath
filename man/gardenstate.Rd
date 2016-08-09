@@ -4,14 +4,23 @@
 \name{gardenstate}
 \alias{gardenstate}
 \title{Province polygons with inland waters as holes.}
+\format{\code{gardenstate} is the geometry, a data frame with columns:
+\describe{
+ \item{x,y}{x and y coordinate}
+ \item{id}{Key attribute for the objects}
+ \item{piece,part}{Group attribute, unique values identify a closed ring, part is the part 'id' within an object}
+ \item{hole}{Logical, \code{FALSE} for "island" vs. "hole"}
+ \item{order}{Numeric value to identify sort order within \code{branch}}
+ }}
 \description{
 A data frame of coordinates and geometry classifiers
 of the garden state, South Australia.
 }
 \details{
 The PROJ.4 string for this map is:
-'+proj=lcc +lat_1=-47 +lat_2=-17 +lat_0=-32 +lon_0=136 +x_0=0 +y_0=0
- +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs'
+\describe{ +proj=lcc +lat_1=-47 +lat_2=-17 +lat_0=-32 +lon_0=136 +x_0=0 +y_0=0
+ +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
+}
 }
 \examples{
 gs <- ggplot(gardenstate)

@@ -25,9 +25,17 @@ knitr::opts_chunk$set(
 
 ## ggpolypath
 
-A `ggplot2` geom for polygons with holes. 
+A `ggplot2` geom for polygons with holes, called 'geom_polypath'. 
 
 ## Install
+
+Install from CRAN. 
+
+```{r,eval=FALSE}
+install.packages("ggpolypath")
+```
+
+Install the development version. 
 
 ```{r,eval=FALSE}
 ## install from Github
@@ -37,8 +45,10 @@ devtools::install_github("mdsumner/ggpolypath")
 
 ## Example
 
-See the vigne
-```{r vignette-body, child = "vignettes/ggpolypath.Rmd"}
+See the vignette for examples. 
+
+```{r,eval=FALSE}
+vignette("ggpolypath")
 ```
 
 ## Gory details
