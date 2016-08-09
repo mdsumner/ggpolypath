@@ -2,7 +2,10 @@
 title: "Polygons with holes for ggplot2"
 author: "Michael D. Sumner"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  rmarkdown::html_vignette:
+    fig_width: 5
+    fig_height: 3
 vignette: >
   %\VignetteIndexEntry{ggpolypath}
   %\VignetteEngine{knitr::rmarkdown}
@@ -11,7 +14,6 @@ vignette: >
 
 ```{r}
 library(ggpolypath)
-data(maphome)
 
 ggplot(maphome) + aes(x = x_, y = y_, group = branch_, fill = object_) +
   geom_polypath()
@@ -24,5 +26,14 @@ The same example, but using the linked per-object metadata.
 ggplot(merge(maphome, dathome[, c("object_", "name")])) + 
   aes(x = x_, y = y_, group = branch_, fill = name) + 
   geom_polypath()
+
+```
+
+Something more map. 
+
+```{r, fig.height = 6, fig.width = 6}
+gs <- ggplot(gardenstate)
+gs <- gs + aes(x = x, y = y, group = group, fill = id)
+gs +  geom_polypath() + geom_path() + coord_equal()
 
 ```
