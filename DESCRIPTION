@@ -10,7 +10,7 @@ Authors@R: c(person("Michael D.","Sumner",
     person(given = "Kohske", family = "Takahashi",
        email = "takahashi.kohske@gmail.com",
        role = "ctb", comment = "original author of 'geom_holygon'"))
-URL: https://github.com/mdsumner/ggpolypath, http://rpubs.com/kohske/3522
+URL: https://mdsumner.gihub.io/ggpolypath, http://rpubs.com/kohske/3522
 BugReports: https://github.com/mdsumner/ggpolypath/issues
 Depends:
     R (>= 3.1),
