@@ -82,7 +82,7 @@ GeomPolypath <- ggproto(
   "GeomPolypath",
   GeomPolygon,
   extra_params = c("na.rm", "rule"),
-  draw_panel = function(data, scales, coordinates, rule) {
+  draw_panel = function(self, data, scales, coordinates, rule) {
     n <- nrow(data)
     if (n == 1)
       return(zeroGrob())
