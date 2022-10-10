@@ -5,13 +5,24 @@
 \alias{dathome}
 \alias{maphome}
 \title{Simple polygon data}
-\format{\code{dathome} is the metadata, a data frame with columns:
+\format{
+\code{dathome} is the metadata, a data frame with columns:
 \describe{
  \item{name}{A descriptive name}
  \item{colour}{A colour to distinguish each object}
  \item{FAD}{An arbitrary numeric value}
  \item{object_}{Key attribute, linking this object to its geometry in \code{\link{maphome}}}
-}}
+}
+
+\code{maphome} is the geometry, a data frame with columns:
+\describe{
+ \item{object_}{Key attribute, linking this row to its metadata in \code{\link{dathome}}}
+ \item{branch_}{Group attribute, unique values identify a closed ring}
+ \item{island_}{Logical, \code{TRUE} for "island" vs. "hole"}
+ \item{order_}{Numeric value to identify sort order within \code{branch}}
+ \item{x_,y_}{x and y coordinate}
+ }
+}
 \description{
 A "home" profile of three objects with multiple parts as two related data frames.
 }
@@ -20,8 +31,7 @@ A "home" profile of three objects with multiple parts as two related data frames
 }
 \examples{
 ggplot(maphome) + aes(x = x_, y = y_, group = branch_, fill = object_) +
-geom_polypath() + facet_wrap(~object_, nrow = nrow(dathome))
+geom_polypath() + geom_path() + facet_wrap(~object_, nrow = nrow(dathome))
 
 
 }
-

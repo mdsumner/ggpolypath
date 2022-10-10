@@ -8,9 +8,15 @@ output:
     fig_height: 3
 vignette: >
   %\VignetteIndexEntry{ggpolypath}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
+
+```{r, include = FALSE}
+options(rmarkdown.html_vignette.check_title = FALSE)
+```
 
 ```{r}
 library(ggpolypath)

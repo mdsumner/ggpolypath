@@ -2,57 +2,72 @@
 % Please edit documentation in R/geom_polypath.R
 \docType{data}
 \name{geom_polypath}
-\alias{GeomPolypath}
 \alias{geom_polypath}
+\alias{GeomPolypath}
 \title{Geom polypath, a polygon filled path that can include holes.}
 \usage{
-geom_polypath(mapping = NULL, data = NULL, stat = "identity",
-  position = "identity", na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE, rule = "winding", ...)
+geom_polypath(
+  mapping = NULL,
+  data = NULL,
+  stat = "identity",
+  position = "identity",
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  rule = "winding",
+  ...
+)
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \code{\link{aes}} or
-\code{\link{aes_}}. If specified and \code{inherit.aes = TRUE} (the
+\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}} or
+\code{\link[ggplot2:aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
 default), it is combined with the default mapping at the top level of the
 plot. You must supply \code{mapping} if there is no plot mapping.}
 
 \item{data}{The data to be displayed in this layer. There are three
-   options:
+options:
 
-   If \code{NULL}, the default, the data is inherited from the plot
-   data as specified in the call to \code{\link{ggplot}}.
+If \code{NULL}, the default, the data is inherited from the plot
+data as specified in the call to \code{\link[ggplot2:ggplot]{ggplot()}}.
 
-   A \code{data.frame}, or other object, will override the plot
-   data. All objects will be fortified to produce a data frame. See
-   \code{\link{fortify}} for which variables will be created.
+A \code{data.frame}, or other object, will override the plot
+data. All objects will be fortified to produce a data frame. See
+\code{\link[ggplot2:fortify]{fortify()}} for which variables will be created.
 
-   A \code{function} will be called with a single argument,
-   the plot data. The return value must be a \code{data.frame.}, and
-   will be used as the layer data.}
+A \code{function} will be called with a single argument,
+the plot data. The return value must be a \code{data.frame}, and
+will be used as the layer data. A \code{function} can be created
+from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
 \item{stat}{The statistical transformation to use on the data for this
-layer, as a string.}
+layer, either as a \code{ggproto} \code{Geom} subclass or as a string naming the
+stat stripped of the \code{stat_} prefix (e.g. \code{"count"} rather than
+\code{"stat_count"})}
 
-\item{position}{Position adjustment, either as a string, or the result of
-a call to a position adjustment function.}
+\item{position}{Position adjustment, either as a string naming the adjustment
+(e.g. \code{"jitter"} to use \code{position_jitter}), or the result of a call to a
+position adjustment function. Use the latter if you need to change the
+settings of the adjustment.}
 
-\item{na.rm}{If \code{FALSE} (the default), removes missing values with
-a warning.  If \code{TRUE} silently removes missing values.}
+\item{na.rm}{If \code{FALSE}, the default, missing values are removed with
+a warning. If \code{TRUE}, missing values are silently removed.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
-\code{FALSE} never includes, and \code{TRUE} always includes.}
+\code{FALSE} never includes, and \code{TRUE} always includes.
+It can also be a named logical vector to finely select the aesthetics to
+display.}
 
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. \code{\link{borders}}.}
+the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{rule}{character value specifying the path fill mode: either "winding" or "evenodd", see \code{\link[graphics]{polypath}}}
 
-\item{...}{other arguments passed on to \code{\link{layer}}. These are
+\item{...}{Other arguments passed on to \code{\link[ggplot2:layer]{layer()}}. These are
 often aesthetics, used to set an aesthetic to a fixed value, like
-\code{color = "red"} or \code{size = 3}. They may also be parameters
+\code{colour = "red"} or \code{size = 3}. They may also be parameters
 to the paired geom/stat.}
 }
 \description{
@@ -71,10 +86,10 @@ See \url{https://en.wikipedia.org/wiki/Even-odd_rule} and
 # one contains the coordinates of each polygon (positions),  and the
 # other the values associated with each polygon (values).  An id
 # variable links the two together.
-# Normally this would not be created manually, but by using \\code{\\link{fortify}}
+# Normally this would not be created manually, but by using \code{\link{fortify}}
 # to generate it from the Spatial classes in the `sp` package.
 
-## the built-in data \\code{\\link{home}} uses nested data frames
+## the built-in data \code{\link{home}} uses nested data frames
 library(ggplot2)
 ggplot(maphome) + aes(x = x_, y = y_, group = branch_, fill = factor(object_)) +
 geom_polypath()
@@ -111,7 +126,6 @@ datapoly <- merge(values, positions, by = c("id"))
 # just the front wall (and chimney), with its three parts, the first of which has three holes
 wall <- ggplot(datapoly[datapoly$id == 1, ], aes(x = x, y = y))
 wall + geom_polypath(aes(fill = id, group = group))
-
 }
 \seealso{
 \code{\link{polypath}} and \code{\link{pathGrob}}
@@ -121,4 +135,3 @@ wall + geom_polypath(aes(fill = id, group = group))
  \code{\link{geom_ribbon}} for a polygon anchored on the x-axis
 }
 \keyword{datasets}
-
