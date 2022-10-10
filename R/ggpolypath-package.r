@@ -1,8 +1,16 @@
-#' ggpolypath.
+#' ggpolypath
 #'
+#' Tools for working with polygons with holes in 'ggplot2', with a new 'geom' for drawing a 'polypath' applying the 'evenodd' or 'winding' rules.
 #' @name ggpolypath
 #' @docType package
 NULL
+
+`%||%` <- function (a, b)
+{
+    if (!is.null(a))
+        a
+    else b
+}
 
 #' Simple polygon data
 #'
@@ -26,7 +34,7 @@ NULL
 #'  }
 #' @examples
 #' ggplot(maphome) + aes(x = x_, y = y_, group = branch_, fill = object_) +
-#' geom_polypath() + facet_wrap(~object_, nrow = nrow(dathome))
+#' geom_polypath() + geom_path() + facet_wrap(~object_, nrow = nrow(dathome))
 #'
 #'
 #' @name dathome

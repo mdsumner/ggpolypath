@@ -64,7 +64,6 @@
 #' # just the front wall (and chimney), with its three parts, the first of which has three holes
 #' wall <- ggplot(datapoly[datapoly$id == 1, ], aes(x = x, y = y))
 #' wall + geom_polypath(aes(fill = id, group = group))
-#'
 geom_polypath <- function (mapping = NULL, data = NULL, stat = "identity", position = "identity",
                           na.rm = FALSE, show.legend = NA, inherit.aes = TRUE, rule = "winding", ...) {
   ggplot2::layer(data = data, mapping = mapping, stat = stat, geom = GeomPolypath,
@@ -89,22 +88,30 @@ GeomPolypath <- ggproto(
 
     munched <- coord_munch(coordinates, data, scales)
     munched <- munched[order(munched$group), ]
+
     ## function to be applied to get a pathGrob for each "region"
     object_munch <- function(xmunch) {
       first_idx <- !duplicated(xmunch$group)
       first_rows <- xmunch[first_idx, ]
+
       grid::pathGrob(xmunch$x, xmunch$y, default.units = "native",
                id = xmunch$group, rule = rule,
                gp = grid::gpar(col = first_rows$colour,
                          fill = alpha(first_rows$fill, first_rows$alpha),
-                         lwd = first_rows$size * .pt,
+                         lwd = (first_rows$linewidth %||% first_rows$size) * .pt,
+                         #lwd = first_rows$size * .pt,
                          lty = first_rows$linetype))
     }
     ggplot2:::ggname(
       "geom_holygon",
       do.call(grid::grobTree, lapply(split(munched, munched$fill), object_munch))
     )
-  }
+  },
+    # To allow using size in ggplot2 < 3.4.0
+  non_missing_aes = "size",
+
+  # Tell ggplot2 to perform automatic renaming
+  rename_size = TRUE
 )
 
 
