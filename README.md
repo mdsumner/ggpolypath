@@ -2,15 +2,23 @@
 
 ------------------------------------------------------------------------
 
-[![Travis-CI Build Status](https://travis-ci.org/mdsumner/ggpolypath.svg?branch=master)](https://travis-ci.org/mdsumner/ggpolypath) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/mdsumner/ggpolypath?branch=master&svg=true)](https://ci.appveyor.com/project/mdsumner/ggpolypath) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/ggpolypath)](https://cran.r-project.org/package=ggpolypath) [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/ggpolypath)](http://www.r-pkg.org/pkg/ggpolypath)
+<!-- badges: start -->
 
-ggpolypath
-----------
+[![R-CMD-check](https://github.com/mdsumner/ggpolypath/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mdsumner/ggpolypath/actions/workflows/R-CMD-check.yaml)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ggpolypath)](https://CRAN.R-project.org/package=ggpolypath)
+<!-- badges: end -->
 
-A `ggplot2` geom for polygons with holes, called 'geom\_polypath'.
+## ggpolypath
 
-Install
--------
+A `ggplot2` geom for polygons with holes, called ‘geom_polypath’.
+
+PLEASE NOTE: ggpolypath predates full support for polygonal path
+geoemtry in ggplot2, we advise use of the ggplot2 package directly
+rather than this package, please see
+<https://www.tidyverse.org/blog/2019/06/ggplot2-3-2-0/>.
+
+## Install
 
 Install from CRAN.
 
@@ -25,8 +33,7 @@ Install the development version.
 devtools::install_github("mdsumner/ggpolypath")
 ```
 
-Example
--------
+## Example
 
 See the vignette for examples.
 
@@ -34,9 +41,8 @@ See the vignette for examples.
 vignette("ggpolypath")
 ```
 
-Gory details
-------------
+## Gory details
 
 More examples, and more detail than you probably need can be found here:
 
-<https://github.com/r-gris/polyggon/blob/master/README.md>
+<https://github.com/hypertidy/polyggon/blob/master/README.md>

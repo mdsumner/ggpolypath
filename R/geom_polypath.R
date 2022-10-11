@@ -16,6 +16,7 @@
 #'  \code{\link{geom_ribbon}} for a polygon anchored on the x-axis
 #' @param rule character value specifying the path fill mode: either "winding" or "evenodd", see \code{\link[graphics]{polypath}}
 #' @export
+#' @return a ggplot2 layer
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_point
 #' @importFrom ggplot2 zeroGrob

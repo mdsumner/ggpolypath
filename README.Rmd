@@ -57,7 +57,7 @@ vignette("ggpolypath")
 
 More examples, and more detail than you probably need can be found here: 
 
-https://github.com/r-gris/polyggon/blob/master/README.md
+https://github.com/hypertidy/polyggon/blob/master/README.md
 
 
 

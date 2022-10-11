@@ -40,14 +40,10 @@ will be used as the layer data. A \code{function} can be created
 from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
 \item{stat}{The statistical transformation to use on the data for this
-layer, either as a \code{ggproto} \code{Geom} subclass or as a string naming the
-stat stripped of the \code{stat_} prefix (e.g. \code{"count"} rather than
-\code{"stat_count"})}
+layer, as a string.}
 
-\item{position}{Position adjustment, either as a string naming the adjustment
-(e.g. \code{"jitter"} to use \code{position_jitter}), or the result of a call to a
-position adjustment function. Use the latter if you need to change the
-settings of the adjustment.}
+\item{position}{Position adjustment, either as a string, or the result of
+a call to a position adjustment function.}
 
 \item{na.rm}{If \code{FALSE}, the default, missing values are removed with
 a warning. If \code{TRUE}, missing values are silently removed.}
@@ -69,6 +65,9 @@ the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 often aesthetics, used to set an aesthetic to a fixed value, like
 \code{colour = "red"} or \code{size = 3}. They may also be parameters
 to the paired geom/stat.}
+}
+\value{
+a ggplot2 layer
 }
 \description{
 Polygons are drawn by tracing a 'path' of linked vertices and applying  rule to differentiate

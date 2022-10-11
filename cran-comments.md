@@ -1,15 +1,15 @@
-## Test environments
-* local Windows install, R 3.3.1
-* ubuntu 12.04 (on travis-ci), R 3.3.1
-* win-builder (devel and release)
 
-## R CMD check results
+## ggpolypath 0.2.0
 
-0 errors | 0 warnings | 1 note
+Update to pre-empt upcoming changes to ggplot2 (size->linewidth aesthetic). 
 
-* This is a new release.
+Passes check on upcoming ggplot2 3.4.0 and current CRAN version 3.3.6. 
 
-* CRAN and r-pkg.org URLs are pre-emptive 
+## revdeps
+
+- venn package passes check
+- inlabru author confirms passing check (and other revdep packages 'intSDM', 'PointedSDMs' leverage inlabru so I assume they won't be affected but I can't install these
+- RSDA I cannot install myself to check, so have emailed the author
 
 Thanks very much, 
 
