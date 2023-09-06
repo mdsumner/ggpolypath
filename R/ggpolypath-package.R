@@ -1,15 +1,24 @@
+#' @keywords internal
+"_PACKAGE"
+
+## usethis namespace: start
+## usethis namespace: end
+NULL
+
+
+
+
 #' ggpolypath
 #'
 #' Tools for working with polygons with holes in 'ggplot2', with a new 'geom' for drawing a 'polypath' applying the 'evenodd' or 'winding' rules.
-#' @name ggpolypath
-#' @docType package
+#' @name ggpolypath-package
 NULL
 
 `%||%` <- function (a, b)
 {
-    if (!is.null(a))
-        a
-    else b
+  if (!is.null(a))
+    a
+  else b
 }
 
 #' Simple polygon data
