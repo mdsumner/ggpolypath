@@ -1,3 +1,7 @@
+# ggpolypath 0.3.0
+
+* Fixed namespace doc thanks to CRAN. 
+
 # ggpolypath 0.2.0
 
 * Updated use of 'size' aesthetic to 'linewidth' in line with ggplot2 instructions: https://www.tidyverse.org/blog/2022/08/ggplot2-3-4-0-size-to-linewidth/ see issue #6. 
