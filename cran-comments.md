@@ -1,7 +1,7 @@
 
-## ggpolypath 0.3.0
+## ggpolypath 0.4.0
 
-Update to fix namespace doc. 
+Update to fix unanchored doc links. 
 
 Thanks!  
 

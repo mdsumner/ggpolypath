@@ -9,11 +9,11 @@
 #' See \url{https://en.wikipedia.org/wiki/Even-odd_rule} and
 #' \url{https://en.wikipedia.org/wiki/Nonzero-rule} for more details.
 #' @seealso
-#' \code{\link{polypath}} and \code{\link{pathGrob}}
-#' \code{\link{geom_polygon}} for the implementation on \code{\link[grid]{polygonGrob}},
-#' \code{\link{geom_map}} for a convenient way to tie the values and coordinates together,
-#'  \code{\link{geom_path}} for an unfilled polygon,
-#'  \code{\link{geom_ribbon}} for a polygon anchored on the x-axis
+#' \code{\link[graphics]{polypath}} and \code{\link[grid]{pathGrob}}
+#' \code{\link[ggplot2]{geom_polygon}} for the implementation on \code{\link[grid]{polygonGrob}},
+#' \code{\link[ggplot2]{geom_map}} for a convenient way to tie the values and coordinates together,
+#'  \code{\link[ggplot2]{geom_path}} for an unfilled polygon,
+#'  \code{\link[ggplot2]{geom_ribbon}} for a polygon anchored on the x-axis
 #' @param rule character value specifying the path fill mode: either "winding" or "evenodd", see \code{\link[graphics]{polypath}}
 #' @export
 #' @return a ggplot2 layer

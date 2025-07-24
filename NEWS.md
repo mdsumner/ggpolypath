@@ -1,3 +1,7 @@
+# ggpolypath 0.4.0
+
+Fix unanchored doc links, thanks CRAN. 
+
 # ggpolypath 0.3.0
 
 * Fixed namespace doc thanks to CRAN. 
